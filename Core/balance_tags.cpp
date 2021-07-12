@@ -8,7 +8,7 @@ void report_error(error_types error_type, int start_index, std::vector<balance_e
     balance_error_arr.push_back(error);
 }
 
-void balance_tags(std::string xml_string)
+std::vector<balance_error> balance_tags(std::string xml_string)
 {
     std::stack<tag> tag_stack;
     std::vector<balance_error> balance_error_arr;
@@ -66,6 +66,7 @@ void balance_tags(std::string xml_string)
         report_error(WRONG_TAG, tag_stack.top().start_index, balance_error_arr);
         tag_stack.pop();
     }
+    return balance_error_arr;
 }
 
 // stack ----> string

@@ -7,5 +7,5 @@
 #include "types.h"
 
 void report_error(error_types error_type, int start_index, std::vector<balance_error> &balance_error_arr);
-void balance_tags(std::string xml_string);
+std::vector<balance_error> balance_tags(std::string xml_string);
 #endif
