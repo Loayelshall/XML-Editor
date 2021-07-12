@@ -1,28 +1,41 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "QFileDialog"
-#include "QDebug"
-#include "QMessageBox"
 
 
 int currentFile = 0;
 QVector<QString> files;
 QVector<QString> fileEdits;
-
+syntaxHighlighter * highlighter;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-
-
     ui->setupUi(this);
-    ui->textEdit->setText("fd");
+    highlighter = new syntaxHighlighter(ui->textEdit);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete highlighter;
+}
+
+
+QString markErrors(QVector<int> errors, QString in){
+    for(int i=0; i<errors.size(); i++){
+        in.insert(errors[i]-3, "!Error <--");
+        int j = errors[i];
+        while(1){
+            j++;
+            if(in[j] == ">"){
+                break;
+            }
+        }
+        in.insert(j+1, "  -->");
+    }
+    return in;
+
 }
 
 
@@ -53,12 +66,23 @@ void MainWindow::on_pushButton_clicked()
         // Add Exit Button
         table->setItem(rowCount,1, new QTableWidgetItem("Close File"));
         table->item(rowCount,1)->setForeground(QBrush(QColor(255, 0, 0)));
+
+        QVector<int> test;
+        test.push_back(11);
+        QString testStr = markErrors(test, ui->textEdit->toPlainText());
+        ui->textEdit->setText(testStr);
+
+
+
+
     }
 }
 
 
 void MainWindow::on_textEdit_textChanged()
 {
+
+
     if(files.size() != 0 && currentFile != -1){
         fileEdits[currentFile] = ui->textEdit->toPlainText();
         if(fileEdits[currentFile] == files[currentFile]){
@@ -73,6 +97,7 @@ void MainWindow::on_textEdit_textChanged()
          ui->savedLabel->setStyleSheet("QLabel { color : black; }");
     }
 
+
 }
 
 
@@ -80,9 +105,7 @@ void MainWindow::on_tableWidget_cellClicked(int row, int column)
 {
     if(column == 0){
         //open file
-
         currentFile = row;
-        qDebug() << row;
         ui->textEdit->setText(files[currentFile]);
         if(fileEdits[currentFile] == files[currentFile]){
             ui->savedLabel->setText("Saved");
