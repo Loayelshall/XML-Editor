@@ -4,6 +4,7 @@
 
 enum error_types{
     MISSING_TAG,
+    WRONG_TAG
 };
 
 typedef struct
