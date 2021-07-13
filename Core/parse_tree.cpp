@@ -22,11 +22,19 @@ void parse_tree(tree_node *root, std::string xml_string)
 					attr.push_back(xml_string[i]);
 				}
 			}
-			tree_node *temp = new tree_node(tag, data, attr);
-			node_stack.top()->add_child(temp);
-			node_stack.push(temp);
-			tag.clear();
-			attr.clear();
+			if(xml_string[i-1] == '/'){
+				tree_node *temp = new tree_node(tag, data, attr);
+				node_stack.top()->add_child(temp);
+				tag.clear();
+				attr.clear();
+			} else {
+				tree_node *temp = new tree_node(tag, data, attr);
+				node_stack.top()->add_child(temp);
+				node_stack.push(temp);
+				tag.clear();
+				attr.clear();
+			}
+			
 		}
 		else if (xml_string[i] == '<' && xml_string[i + 1] == '/')
 		{
