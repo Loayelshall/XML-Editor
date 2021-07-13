@@ -71,4 +71,5 @@ void syntaxHighlighter::setFormats(){
 
     m_xmlErrorFormat.setFontUnderline(true);
     m_xmlErrorFormat.setForeground(Qt::red);
+//    m_xmlErrorFormat.setBackground(Qt::red);
 }

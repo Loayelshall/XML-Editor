@@ -1,6 +1,6 @@
 #include "balance_tags.h"
 
-void report_error(error_types error_type, int start_index, std::vector<balance_error> &balance_error_arr)
+void report_error(error_types error_type, int start_index, QVector<balance_error> &balance_error_arr)
 {
     balance_error error;
     error.type = error_type;
@@ -8,10 +8,10 @@ void report_error(error_types error_type, int start_index, std::vector<balance_e
     balance_error_arr.push_back(error);
 }
 
-std::vector<balance_error> balance_tags(std::string xml_string)
+QVector<balance_error> balance_tags(std::string xml_string)
 {
     std::stack<tag> tag_stack;
-    std::vector<balance_error> balance_error_arr;
+    QVector<balance_error> balance_error_arr;
     std::string string_buffer;
     for (size_t i = 0; i < xml_string.size(); i++)
     {
@@ -56,7 +56,7 @@ std::vector<balance_error> balance_tags(std::string xml_string)
                 tag_stack.push(tag_buffer);
             }
         }
-        else if (xml_string[i] != '\n' && xml_string[i] != ' ')
+        else if (xml_string[i] != '\n' && xml_string[i] != ' ' && xml_string[i] != '\r')
         {
             string_buffer.push_back(xml_string[i]);
         }

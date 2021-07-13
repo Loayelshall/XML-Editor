@@ -7,6 +7,10 @@
 #include "QMessageBox"
 #include "QVector"
 #include "syntaxhighlighter.h"
+#include "../../Core/types.h"
+#include "../../Core/balance_tags.h"
+#include "algorithm"
+#include <QShortcut>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -26,6 +30,8 @@ private slots:
     void on_textEdit_textChanged();
 
     void on_tableWidget_cellClicked(int row, int column);
+
+    void save();
 
 private:
     Ui::MainWindow *ui;
