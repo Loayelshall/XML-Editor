@@ -6,6 +6,5 @@
 #include <vector>
 #include "types.h"
 
-void parse_tree(tree_node *root, std::string xml_string)
-
+void parse_tree(tree_node *root, std::string xml_string);
 #endif
