@@ -68,6 +68,9 @@ public:
 		children.pop_back();
 		return child;
 	}
+	std::vector<tree_node *> get_children(){
+		return children;
+	}
 };
 
 #endif

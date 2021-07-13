@@ -6,6 +6,7 @@
 #include <stack>
 #include "types.h"
 #include "parse_tree.h"
+#include "prettifying.h"
 
 void xml_to_string(std::string file_path, std::string &destination)
 {
