@@ -22,17 +22,14 @@ void parse_tree(tree_node *root, std::string xml_string)
 					attr.push_back(xml_string[i]);
 				}
 			}
-			if(xml_string[i-1] == '/'){
-				tree_node *temp = new tree_node(tag, data, attr);
-				node_stack.top()->add_child(temp);
-				tag.clear();
-				attr.clear();
-			} else {
-				tree_node *temp = new tree_node(tag, data, attr);
-				node_stack.top()->add_child(temp);
+
+			tree_node *temp = new tree_node(tag, data, attr);
+			node_stack.top()->add_child(temp);
+			tag.clear();
+			attr.clear();
+			if (xml_string[i - 1] != '/')
+			{
 				node_stack.push(temp);
-				tag.clear();
-				attr.clear();
 			}
 			
 		}
@@ -51,7 +48,8 @@ void parse_tree(tree_node *root, std::string xml_string)
 			}
 			i--;
 		}
-		else if(xml_string[i] == '<' && xml_string[i + 1] == '!'){
+		else if (xml_string[i] == '<' && xml_string[i + 1] == '!')
+		{
 			i += 3;
 			for (; xml_string[i] != '-'; i++)
 			{
@@ -60,7 +58,7 @@ void parse_tree(tree_node *root, std::string xml_string)
 			tree_node *temp = new tree_node("Comment", data, "");
 			data.clear();
 			node_stack.top()->add_child(temp);
-			i+=2;
+			i += 2;
 		}
 	}
 }
