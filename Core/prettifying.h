@@ -6,5 +6,5 @@
 #include <string>
 #include "types.h"
 
-void pretty(tree_node *root, int level,std::string input);
+void pretty(tree_node *root, int level,std::string* input);
 #endif

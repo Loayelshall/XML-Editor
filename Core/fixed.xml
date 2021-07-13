@@ -1,0 +1,14 @@
+<Snippet>
+    <Header>
+        <id>1</id>
+            <Title>
+                <Author>
+                    <Description>An SXML parameters block</Description>
+                </Author>
+            </Title>
+            <Code name="test" style="test2">
+        This is a test code
+            </Code>
+            <ImageIndex>43</ImageIndex>
+        </Header>
+    </Snippet>

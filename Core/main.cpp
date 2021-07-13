@@ -23,7 +23,14 @@ void xml_to_string(std::string file_path, std::string &destination)
 int main()
 {
 	std::string xml_string;
-	xml_to_string("test.xml", xml_string);
+	xml_to_string("fixed.xml", xml_string);
 	tree_node *root = new tree_node("XML", "", "");
 	parse_tree(root, xml_string);
+	
+
+	
+	std::string out = "";
+	pretty(root, -1, &out);
+	std::cout << out;
+
 }

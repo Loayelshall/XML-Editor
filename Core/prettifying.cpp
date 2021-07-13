@@ -1,22 +1,22 @@
 #include "prettifying.h"
 
-void pretty(tree_node *root, int level,std::string input){
+void pretty(tree_node *root, int level,std::string* input){
     //comment
     if(root->get_name() == "Comment"){
-        input += "<!--" + root->get_data() + "-->\n";
+        *input += "<!--" + root->get_data() + "-->\n";
         return; 
     }
 
     //opening tag
     for (int i = 0; i < level; i++)
     {
-        input += "    ";
+        *input += "    ";
     }
     if(root->get_name() != "XML"){
         if(root->get_attr() != ""){
-            input += "<" + root->get_name() + " " + root->get_attr() + ">\n";           
+            *input += "<" + root->get_name() + " " + root->get_attr() + ">\n";           
         } else {
-            input += "<" + root->get_name() + ">\n";
+            *input += "<" + root->get_name() + ">\n";
         }
     }
 
@@ -30,18 +30,23 @@ void pretty(tree_node *root, int level,std::string input){
     if(children.size() == 0){
         for (int i = 0; i <= level; i++)
         {
-            input += "    ";
+            *input += "    ";
         }
-        input += root->get_data() + "\n";
-
+        std::string data = root->get_data();
+        if(data[data.length()-1] != '\n'){ 
+            *input += root->get_data() + "\n";
+        }
     }
     
-    //closing tag
-    for (int i = 0; i < level; i++)
-    {
-        input += "    ";
+    if(root->get_name() != "XML"){
+        //closing tag
+        for (int i = 0; i < level; i++)
+        {
+            *input += "    ";
+        }
+        *input += "<" + root->get_name() + "/>\n";
     }
-    input += "<" + root->get_name() + "/>\n";
+    
     return;
 
 }

@@ -44,7 +44,9 @@ void parse_tree(tree_node *root, std::string xml_string)
 		{
 			for (; xml_string[i] != '<'; i++)
 			{
-				data.push_back(xml_string[i]);
+				if(xml_string[i] != '\n' && xml_string[i] != '\r'){
+					data.push_back(xml_string[i]);
+				}
 			}
 			i--;
 		}
