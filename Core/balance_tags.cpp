@@ -12,7 +12,7 @@ std::vector<balance_error> balance_tags(std::string xml_string)
 {
     std::stack<tag> tag_stack;
     std::vector<balance_error> balance_error_arr;
-    std::string string_buffer;
+    std::string string_buffer, attribute_buffer;
     for (size_t i = 0; i < xml_string.size(); i++)
     {
         tag tag_buffer;
@@ -20,10 +20,17 @@ std::vector<balance_error> balance_tags(std::string xml_string)
         {
             int start_index = i;
             i++;
-            for (size_t j = 0; xml_string[i] != '>' && xml_string[i] != ' '; j++, i++)
+            for (; xml_string[i] != '>' && xml_string[i] != ' '; i++)
             {
                 tag_buffer.name.push_back(xml_string[i]);
                 tag_buffer.start_index = start_index;
+            }
+            if (xml_string[i] == ' ')
+            {
+                for (; xml_string[i] != '>'; i++)
+                {
+                    attribute_buffer.push_back(xml_string[i]);
+                }
             }
             std::cout << tag_buffer.name << '\n';
             if (tag_buffer.name[0] == '/')
@@ -53,7 +60,10 @@ std::vector<balance_error> balance_tags(std::string xml_string)
                     tag_stack.pop();
                     string_buffer.clear();
                 }
-                tag_stack.push(tag_buffer);
+                if (xml_string[i - 1] != '/')
+                {
+                    tag_stack.push(tag_buffer);
+                }
             }
         }
         else if (xml_string[i] != '\n' && xml_string[i] != ' ')
