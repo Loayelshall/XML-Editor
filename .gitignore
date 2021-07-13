@@ -1,2 +1,5 @@
 
 Frontend/XML_Editor/XML_Editor.pro.user
+.vscode/launch.json
+.vscode/settings.json
+.vscode/tasks.json
