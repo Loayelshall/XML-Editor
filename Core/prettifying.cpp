@@ -8,16 +8,31 @@ void pretty(tree_node *root, int level,std::string* input){
     }
 
     //opening tag
-    for (int i = 0; i < level; i++)
-    {
-        *input += "    ";
-    }
+   
     if(root->get_name() != "XML"){
-        if(root->get_attr() != ""){
-            *input += "<" + root->get_name() + " " + root->get_attr() + ">\n";           
+        for (int i = 0; i < level; i++)
+        {
+            *input += "    ";
+        }
+        std::vector<attribute> attr = root->get_attr();
+        if(attr.size() != 0){            
+            *input += "<" + root->get_name() + " ";
+            for (int j = 0; j < attr.size(); j++)
+            {
+                *input += attr[j].key + "=\"" + attr[j].value + "\"";
+                if(j != attr.size()-1){
+                    *input += " ";
+                }
+            }
+            *input += ">\n";
         } else {
             *input += "<" + root->get_name() + ">\n";
         }
+    } else {
+        if(root->get_data() != ""){
+            *input += "<?" + root->get_data() + "?>\n";
+        }
+        
     }
 
     // children
@@ -28,14 +43,17 @@ void pretty(tree_node *root, int level,std::string* input){
     }
 
     if(children.size() == 0){
-        for (int i = 0; i <= level; i++)
-        {
-            *input += "    ";
+        if(root->get_name() != "XML"){
+            for (int i = 0; i <= level; i++)
+            {
+                *input += "    ";
+            }
+            std::string data = root->get_data();
+            if(data[data.length()-1] != '\n'){ 
+                *input += root->get_data() + "\n";
+            }    
         }
-        std::string data = root->get_data();
-        if(data[data.length()-1] != '\n'){ 
-            *input += root->get_data() + "\n";
-        }
+        
     }
     
     if(root->get_name() != "XML"){
@@ -44,7 +62,7 @@ void pretty(tree_node *root, int level,std::string* input){
         {
             *input += "    ";
         }
-        *input += "<" + root->get_name() + "/>\n";
+        *input += "</" + root->get_name() + ">\n";
     }
     
     return;
