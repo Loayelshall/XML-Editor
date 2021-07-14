@@ -2,6 +2,8 @@
 #define TYPES_H
 #include <string>
 
+#define COMMENT_TAG "xml,comment"
+
 enum error_types{
     MISSING_TAG,
     WRONG_TAG
@@ -19,16 +21,22 @@ typedef struct
     int index;
 } balance_error;
 
+typedef struct
+{
+    std::string key;
+    std::string value;
+} attribute;
+
 class tree_node
 {
 private:
 	std::string name;
 	std::string data;
-	std::string attr;
+	std::vector<attribute> attr;
 	std::vector<tree_node *> children;
 
 public:
-	tree_node(std::string tag, std::string node_data, std::string node_attr)
+	tree_node(std::string tag, std::string node_data, std::vector<attribute> node_attr = std::vector<attribute>())
 	{
 		name = tag;
 		data = node_data;
@@ -42,11 +50,11 @@ public:
 	{
 		name = node_name;
 	}
-	std::string get_attr()
+	std::vector<attribute> get_attr()
 	{
 		return attr;
 	}
-	void set_attr(std::string node_attr)
+	void set_attr(std::vector<attribute> node_attr)
 	{
 		attr = node_attr;
 	}

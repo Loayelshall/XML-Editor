@@ -2,18 +2,35 @@
 
 void minify(tree_node *root, std::string* input){
     //comment
-    if(root->get_name() == "Comment"){
+    if(root->get_name() == COMMENT_TAG){
         *input += "<!--" + root->get_data() + "-->";
         return; 
     }
+  
+
 
     //opening tag
     if(root->get_name() != "XML"){
-        if(root->get_attr() != ""){
-            *input += "<" + root->get_name() + " " + root->get_attr() + ">";           
+          
+        std::vector<attribute> attr = root->get_attr();
+        if(attr.size() != 0){
+            *input += "<" + root->get_name() + " ";
+            for (int j = 0; j < attr.size(); j++)
+            {
+                *input += attr[j].key + "=\"" + attr[j].value + "\" ";
+                if(j != attr.size() - 1){
+                    *input += " ";
+                }
+            }
+            *input += ">";
         } else {
             *input += "<" + root->get_name() + ">";
         }
+    } else {
+        if(!root->get_data().empty()){             
+            *input += "<?" + root->get_data() + "?>";
+        }
+        
     }
 
     // children
