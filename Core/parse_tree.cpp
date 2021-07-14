@@ -1,10 +1,51 @@
 #include "parse_tree.h"
 
+
+std::vector<attribute> trim_attributes(std::string attr_string)
+{
+	attribute attr;
+	std::vector<attribute> attr_vector;
+	bool key_ready = 0, value_ready = 0;
+	for (size_t i = 0; i < attr_string.length(); i++)
+	{
+		if (attr_string[i] != ' ')
+		{
+			if (attr_string[i] == '"')
+			{
+				i++;
+				for (; attr_string[i] != '"'; i++)
+				{
+					attr.value.push_back(attr_string[i]);
+				}
+				key_ready = 1;
+			}
+			else
+			{
+				for (; attr_string[i] != '=' && attr_string[i] != ' ' && attr_string[i] != '\n' && attr_string[i] != '\r'; i++)
+				{
+					attr.key.push_back(attr_string[i]);
+				}
+				value_ready = 1;
+			}
+		}
+		if (value_ready && key_ready)
+		{
+			attr_vector.push_back(attr);
+			attr.key.clear();
+			attr.value.clear();
+			value_ready = 0;
+			key_ready = 0;
+		}
+	}
+	return attr_vector;
+}
+
 void parse_tree(tree_node *root, std::string xml_string)
 {
 	std::stack<tree_node *> node_stack;
 	node_stack.push(root);
 	std::string tag, attr, data;
+	std::vector<attribute> attr_vector;
 	for (size_t i = 0; i < xml_string.size(); i++)
 	{
 		if (xml_string[i] == '<' && xml_string[i + 1] != '/')
@@ -21,17 +62,16 @@ void parse_tree(tree_node *root, std::string xml_string)
 				{
 					attr.push_back(xml_string[i]);
 				}
+				attr_vector = trim_attributes(attr);
 			}
-
-			tree_node *temp = new tree_node(tag, data, attr);
+			tree_node *temp = new tree_node(tag, data, attr_vector);
 			node_stack.top()->add_child(temp);
 			tag.clear();
-			attr.clear();
+			attr_vector.clear();
 			if (xml_string[i - 1] != '/')
 			{
 				node_stack.push(temp);
 			}
-			
 		}
 		else if (xml_string[i] == '<' && xml_string[i + 1] == '/')
 		{
@@ -44,7 +84,8 @@ void parse_tree(tree_node *root, std::string xml_string)
 		{
 			for (; xml_string[i] != '<'; i++)
 			{
-				if(xml_string[i] != '\n' && xml_string[i] != '\r'){
+				if (xml_string[i] != '\n' && xml_string[i] != '\r')
+				{
 					data.push_back(xml_string[i]);
 				}
 			}
@@ -57,7 +98,7 @@ void parse_tree(tree_node *root, std::string xml_string)
 			{
 				data.push_back(xml_string[i]);
 			}
-			tree_node *temp = new tree_node("Comment", data, "");
+			tree_node *temp = new tree_node("Comment", data);
 			data.clear();
 			node_stack.top()->add_child(temp);
 			i += 2;
