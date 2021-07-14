@@ -73,7 +73,6 @@ void parse_tree(tree_node *root, std::string xml_string)
 			{
 				data.push_back(xml_string[i]);
 			}
-
 			if (!xmlTags)
 			{
 				node_stack.top()->set_data(data);
@@ -110,9 +109,13 @@ void parse_tree(tree_node *root, std::string xml_string)
 			if (xml_string[i] == ' ')
 			{
 				i++;
-				for (; xml_string[i] != '>' && xml_string[i] != '/'; i++)
+				for (; xml_string[i] != '>'; i++)
 				{
 					attr.push_back(xml_string[i]);
+				}
+				if (xml_string[i - 1] == '/')
+				{
+					i--;
 				}
 				attr_vector = trim_attributes(attr);
 				attr.clear();
