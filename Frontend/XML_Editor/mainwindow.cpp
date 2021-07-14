@@ -84,10 +84,12 @@ void MainWindow::on_pushButton_clicked()
             QMessageBox::information(0, "Error", file.errorString());
         }
         else {
+#pragma omp parallel
+
             // Open file in text editor
             QString txt = file.readAll();
             int size = txt.size();
-            if(size < 50000){
+            if(size < 50000000){
                 flags.push_back(0);
                 ui->textBrowser->show();
                 ui->plainTextEdit->hide();
@@ -140,7 +142,9 @@ void MainWindow::on_pushButton_clicked()
     //        }
 
         }
+
     }
+
 }
 
 

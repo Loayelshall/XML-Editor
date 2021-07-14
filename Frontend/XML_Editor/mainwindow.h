@@ -11,6 +11,8 @@
 #include "../../Core/balance_tags.h"
 #include "algorithm"
 #include <QShortcut>
+#include <conio.h>
+#include <omp.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
