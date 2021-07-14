@@ -24,9 +24,14 @@ void pretty(tree_node *root, int level,std::string* input){
                     *input += " ";
                 }
             }
-            *input += ">\n";
         } else {
-            *input += "<" + root->get_name() + ">\n";
+            *input += "<" + root->get_name() ;
+        }
+        std::cout << root->get_data() ;
+        if(root->get_data() == "null"){
+            *input += "/>\n";
+        } else {
+            *input += ">\n";
         }
     } else {
         if(!root->get_data().empty()){
