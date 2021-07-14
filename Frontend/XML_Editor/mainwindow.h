@@ -27,11 +27,13 @@ public:
 private slots:
     void on_pushButton_clicked();
 
-    void on_textEdit_textChanged();
-
     void on_tableWidget_cellClicked(int row, int column);
 
     void save();
+
+    void on_textBrowser_textChanged();
+
+    void on_plainTextEdit_textChanged();
 
 private:
     Ui::MainWindow *ui;
