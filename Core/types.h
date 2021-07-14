@@ -6,7 +6,9 @@
 
 enum error_types{
     MISSING_TAG,
-    WRONG_TAG
+    WRONG_TAG,
+    COMMENT_CLOSE,
+    XML_CLOSE
 };
 
 typedef struct
