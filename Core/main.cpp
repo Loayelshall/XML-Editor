@@ -7,6 +7,7 @@
 #include "types.h"
 #include "parse_tree.h"
 #include "prettifying.h"
+#include "minify.h"
 
 void xml_to_string(std::string file_path, std::string &destination)
 {
@@ -30,7 +31,9 @@ int main()
 
 	
 	std::string out = "";
-	pretty(root, -1, &out);
+	// pretty(root, -1, &out);
+	minify(root, &out);
+	
 	std::cout << out;
 
 }
