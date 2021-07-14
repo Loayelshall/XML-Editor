@@ -16,21 +16,45 @@ std::vector<balance_error> balance_tags(std::string xml_string)
     for (size_t i = 0; i < xml_string.size(); i++)
     {
         tag tag_buffer;
-        if(xml_string[i] == '<' && xml_string[i + 1] == '!'){
+        if (xml_string[i] == '<' && xml_string[i + 1] == '?')
+        {
+            int temp = i;
+            i += 2;
+            int xml_close_index = xml_string.find("?>", i, xml_string.length());
+            if (xml_close_index == -1)
+            {
+                report_error(XML_CLOSE, temp, balance_error_arr);
+                break;
+            }
+            else
+            {
+                i += xml_close_index + 2;
+            }
+        }
+        else if (xml_string[i] == '<' && xml_string[i + 1] == '!')
+        {
             //comment
-            if(xml_string[i + 2] == '-' && xml_string[i + 3] == '-'){
-                int temp = i;                
-                i += 4;                
-                for(; xml_string[i] != '-' && xml_string[i + 1] != '-' && xml_string[i + 2] != '>'; i++){
-                    if(xml_string[i] == '\n' || xml_string[i] == '\r' || xml_string[i] == '<' || xml_string[i] == '>'){
-                        report_error(WRONG_TAG, temp, balance_error_arr);        
-                    }
+            if (xml_string[i + 2] == '-' && xml_string[i + 3] == '-')
+            {
+                int temp = i;
+                i += 4;
+                int comment_close_index = xml_string.find("-->", i, xml_string.length());
+                if (comment_close_index == -1)
+                {
+                    report_error(COMMENT_CLOSE, temp, balance_error_arr);
+                    break;
                 }
-            } else {
+                else
+                {
+                    i += comment_close_index + 2;
+                }
+            }
+            else
+            {
                 report_error(WRONG_TAG, i, balance_error_arr);
             }
-        } else 
-        if (xml_string[i] == '<')
+        }
+        else if (xml_string[i] == '<')
         {
             int start_index = i;
             i++;
@@ -92,6 +116,3 @@ std::vector<balance_error> balance_tags(std::string xml_string)
     }
     return balance_error_arr;
 }
-
-// stack ----> string
-// stack ----> string + index open bracket tag with error
