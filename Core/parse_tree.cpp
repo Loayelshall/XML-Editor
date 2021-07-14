@@ -103,14 +103,14 @@ void parse_tree(tree_node *root, std::string xml_string)
 		else if (xml_string[i] == '<' && xml_string[i + 1] != '/')
 		{
 			i++;
-			for (; xml_string[i] != '>' && xml_string[i] != ' '; i++)
+			for (; xml_string[i] != '>' && xml_string[i] != ' ' && xml_string[i] != '/'; i++)
 			{
 				tag.push_back(xml_string[i]);
 			}
 			if (xml_string[i] == ' ')
 			{
 				i++;
-				for (; xml_string[i] != '>'; i++)
+				for (; xml_string[i] != '>' && xml_string[i] != '/'; i++)
 				{
 					attr.push_back(xml_string[i]);
 				}
@@ -119,12 +119,18 @@ void parse_tree(tree_node *root, std::string xml_string)
 			}
 			tree_node *temp = new tree_node(tag, data, attr_vector);
 			node_stack.top()->add_child(temp);
-			tag.clear();
-			attr_vector.clear();
-			if (xml_string[i - 1] != '/')
+
+			if (xml_string[i] == '/')
+			{
+				temp->set_data("null");
+				i++;
+			}
+			else
 			{
 				node_stack.push(temp);
 			}
+			tag.clear();
+			attr_vector.clear();
 		}
 		else if (xml_string[i] == '<' && xml_string[i + 1] == '/')
 		{
