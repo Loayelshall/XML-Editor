@@ -4,7 +4,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <map>
 #include "types.h"
 
-void xml2json(tree_node *root, int level,std::string* xml_string);
+int xml2json(tree_node *root, int level, std::string *input, std::vector<std::string> children_data_arr = std::vector<std::string>(1, "main"));
 #endif
