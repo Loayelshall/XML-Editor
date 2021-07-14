@@ -16,6 +16,20 @@ std::vector<balance_error> balance_tags(std::string xml_string)
     for (size_t i = 0; i < xml_string.size(); i++)
     {
         tag tag_buffer;
+        if(xml_string[i] == '<' && xml_string[i + 1] == '!'){
+            //comment
+            if(xml_string[i + 2] == '-' && xml_string[i + 3] == '-'){
+                int temp = i;                
+                i += 4;                
+                for(; xml_string[i] != '-' && xml_string[i + 1] != '-' && xml_string[i + 2] != '>'; i++){
+                    if(xml_string[i] == '\n' || xml_string[i] == '\r' || xml_string[i] == '<' || xml_string[i] == '>'){
+                        report_error(WRONG_TAG, temp, balance_error_arr);        
+                    }
+                }
+            } else {
+                report_error(WRONG_TAG, i, balance_error_arr);
+            }
+        } else 
         if (xml_string[i] == '<')
         {
             int start_index = i;
