@@ -1,5 +1,21 @@
 #include "parse_tree.h"
 
+std::string trim(const std::string &s)
+{
+	auto start = s.begin();
+	while (start != s.end() && std::isspace(*start))
+	{
+		start++;
+	}
+
+	auto end = s.end();
+	do
+	{
+		end--;
+	} while (std::distance(start, end) > 0 && std::isspace(*end));
+
+	return std::string(start, end + 1);
+}
 
 std::vector<attribute> trim_attributes(std::string attr_string)
 {
@@ -75,6 +91,7 @@ void parse_tree(tree_node *root, std::string xml_string)
 		}
 		else if (xml_string[i] == '<' && xml_string[i + 1] == '/')
 		{
+			data = trim(data);
 			node_stack.top()->set_data(data);
 			i += node_stack.top()->get_name().length() + 2;
 			node_stack.pop();
