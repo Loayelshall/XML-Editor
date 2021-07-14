@@ -90,12 +90,12 @@ void parse_tree(tree_node *root, std::string xml_string)
 		}
 		else if (xml_string[i] == '<' && xml_string[i + 1] == '!')
 		{
-			i += 3;
+			i += 4;
 			for (; xml_string[i] != '-'; i++)
 			{
 				data.push_back(xml_string[i]);
 			}
-			tree_node *temp = new tree_node("Comment", data);
+			tree_node *temp = new tree_node(COMMENT_TAG, data);
 			data.clear();
 			node_stack.top()->add_child(temp);
 			i += 2;
@@ -115,6 +115,7 @@ void parse_tree(tree_node *root, std::string xml_string)
 					attr.push_back(xml_string[i]);
 				}
 				attr_vector = trim_attributes(attr);
+				attr.clear();
 			}
 			tree_node *temp = new tree_node(tag, data, attr_vector);
 			node_stack.top()->add_child(temp);
