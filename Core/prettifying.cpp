@@ -2,7 +2,7 @@
 
 void pretty(tree_node *root, int level,std::string* input){
     //comment
-    if(root->get_name() == "Comment"){
+    if(root->get_name() == COMMENT_TAG){
         *input += "<!--" + root->get_data() + "-->\n";
         return; 
     }

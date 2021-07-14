@@ -2,6 +2,8 @@
 #define TYPES_H
 #include <string>
 
+#define COMMENT_TAG "xml,comment"
+
 enum error_types{
     MISSING_TAG,
     WRONG_TAG
