@@ -22,9 +22,13 @@ void minify(tree_node *root, std::string* input){
                     *input += " ";
                 }
             }
-            *input += ">";
         } else {
-            *input += "<" + root->get_name() + ">";
+            *input += "<" + root->get_name();
+        }
+        if(root->get_data() == "null"){
+            *input += "/>";
+        } else {
+            *input += ">";
         }
     } else {
         if(!root->get_data().empty()){             
