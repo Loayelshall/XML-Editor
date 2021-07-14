@@ -13,8 +13,17 @@ void pretty(tree_node *root, int level,std::string* input){
         *input += "    ";
     }
     if(root->get_name() != "XML"){
-        if(root->get_attr() != ""){
-            *input += "<" + root->get_name() + " " + root->get_attr() + ">\n";           
+        std::vector<attribute> attr = root->get_attr();
+        if(attr.size() != 0){            
+            *input += "<" + root->get_name() + " ";
+            for (int j = 0; j < attr.size(); j++)
+            {
+                *input += attr[j].key + "=\"" + attr[j].value + "\"";
+                if(j != attr.size()-1){
+                    *input += " ";
+                }
+            }
+            *input += ">\n";
         } else {
             *input += "<" + root->get_name() + ">\n";
         }
