@@ -29,7 +29,7 @@ void pretty(tree_node *root, int level,std::string* input){
             *input += "<" + root->get_name() + ">\n";
         }
     } else {
-        if(root->get_data() != ""){
+        if(!root->get_data().empty()){
             *input += "<?" + root->get_data() + "?>\n";
         }
         
