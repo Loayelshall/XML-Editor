@@ -104,7 +104,7 @@ QVector<balance_error> balance_tags(std::string xml_string)
                 }
             }
         }
-        else if (xml_string[i] != '\n' && xml_string[i] != ' ')
+        else if (xml_string[i] != '\n' && xml_string[i] != '\r' && xml_string[i] != ' ')
         {
             string_buffer.push_back(xml_string[i]);
         }
