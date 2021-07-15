@@ -401,7 +401,7 @@ void MainWindow::on_compressBtn_clicked()
             for(int i = 0; i < compressed.size(); i++){
                 stream << compressed[i] << " ";
             }
-            QMessageBox::information(0, "Success", "File Saved Successfully");
+            QMessageBox::information(0, "Success", "File Saved Successfully at" + fileNames[currentFile]);
             ui->savedLabel->setText("Saved");
             ui->savedLabel->setStyleSheet("QLabel { color : green; }");
 

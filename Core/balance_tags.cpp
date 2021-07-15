@@ -19,8 +19,8 @@ QVector<balance_error> balance_tags(std::string xml_string)
         if (xml_string[i] == '<' && xml_string[i + 1] == '?')
         {
             int temp = i;
-            i += 2;
-            int xml_close_index = xml_string.find("?>", i, xml_string.length());
+            i = i + 2;
+            int xml_close_index = xml_string.find("?>", i);
             if (xml_close_index == -1)
             {
                 report_error(XML_CLOSE, temp, balance_error_arr);
@@ -28,7 +28,7 @@ QVector<balance_error> balance_tags(std::string xml_string)
             }
             else
             {
-                i += xml_close_index + 2;
+                i = xml_close_index + 2;
             }
         }
         else if (xml_string[i] == '<' && xml_string[i + 1] == '!')
@@ -37,8 +37,8 @@ QVector<balance_error> balance_tags(std::string xml_string)
             if (xml_string[i + 2] == '-' && xml_string[i + 3] == '-')
             {
                 int temp = i;
-                i += 4;
-                int comment_close_index = xml_string.find("-->", i, xml_string.length());
+                i = i + 4;
+                int comment_close_index = xml_string.find("-->", i);
                 if (comment_close_index == -1)
                 {
                     report_error(COMMENT_CLOSE, temp, balance_error_arr);
@@ -46,7 +46,7 @@ QVector<balance_error> balance_tags(std::string xml_string)
                 }
                 else
                 {
-                    i += comment_close_index + 2;
+                    i = comment_close_index + 3;
                 }
             }
             else
