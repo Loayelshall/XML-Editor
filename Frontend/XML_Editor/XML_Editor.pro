@@ -11,11 +11,16 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    syntaxhighlighter.cpp
+    syntaxhighlighter.cpp \
+    ../../Core/balance_tags.cpp
 
 HEADERS += \
     mainwindow.h \
-    syntaxhighlighter.h
+    syntaxhighlighter.h \
+    ../../Core/types.h \
+    ../../Core/balance_tags.h
+
+
 
 FORMS += \
     mainwindow.ui
@@ -24,3 +29,4 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+QMAKE_CXXFLAGS+= -openmp
