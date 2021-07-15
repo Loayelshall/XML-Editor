@@ -5,6 +5,7 @@
 #include <vector>
 #include <stack>
 #include "types.h"
+#include "balance_tags.h"
 #include "parse_tree.h"
 #include "xml2json.h"
 #include "prettifying.h"
@@ -24,7 +25,8 @@ void xml_to_string(std::string file_path, std::string &destination)
 int main()
 {
 	std::string xml_string;
-	xml_to_string("fixed.xml", xml_string);
+	xml_to_string("data-sample.xml", xml_string);
+    auto err = balance_tags(xml_string);
 	tree_node *root = new tree_node("XML", "");
 	parse_tree(root, xml_string);
 	
