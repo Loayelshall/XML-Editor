@@ -109,7 +109,7 @@ void parse_tree(tree_node *root, std::string xml_string)
 			if (xml_string[i] == ' ')
 			{
 				i++;
-				for (; xml_string[i] != '>'; i++)
+				for (; xml_string[i] != '>' && xml_string[i] != '/'; i++)
 				{
 					attr.push_back(xml_string[i]);
 				}
