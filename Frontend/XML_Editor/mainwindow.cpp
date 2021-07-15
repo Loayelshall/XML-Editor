@@ -47,7 +47,7 @@ QString markErrors(QVector<balance_error> errors, QString in){
                 break;
             }
         }
-        in.insert(j+1, "   -->");
+        in.insert(j+1, "   --!");
     }
     return in;
 
@@ -60,17 +60,32 @@ void MainWindow::save(){
         QFile file(fileNames[currentFile]);      
         if(file.open(QIODevice::ReadWrite)){
             if(!flags[currentFile]){
-                file.write(ui->textBrowser->toPlainText().toLocal8Bit(),qstrlen(ui->textBrowser->toPlainText().toLocal8Bit()));
-                fileEdits[currentFile] = ui->textBrowser->toPlainText();
-                files[currentFile] = ui->textBrowser->toPlainText();
+                if(ui->textBrowser->toPlainText().contains("!Error")){
+                    QMessageBox::information(0, "Error", "Please fix or delete errors before saving");
+                    ui->savedLabel->setText("*Not Saved");
+                    ui->savedLabel->setStyleSheet("QLabel { color : red; }");
+                } else {
+                    file.write(ui->textBrowser->toPlainText().toLocal8Bit(),qstrlen(ui->textBrowser->toPlainText().toLocal8Bit()));
+                    fileEdits[currentFile] = ui->textBrowser->toPlainText();
+                    files[currentFile] = ui->textBrowser->toPlainText();
+                    ui->savedLabel->setText("Saved");
+                    ui->savedLabel->setStyleSheet("QLabel { color : green; }");
+                }
             } else {
-                file.write(ui->plainTextEdit->toPlainText().toLocal8Bit(),qstrlen(ui->plainTextEdit->toPlainText().toLocal8Bit()));
-                fileEdits[currentFile] = ui->plainTextEdit->toPlainText();
-                files[currentFile] = ui->plainTextEdit->toPlainText();
+                if(ui->plainTextEdit->toPlainText().contains("!Error")){
+                    QMessageBox::information(0, "Error", "Please fix or delete errors before saving");
+                    ui->savedLabel->setText("*Not Saved");
+                    ui->savedLabel->setStyleSheet("QLabel { color : red; }");
+                } else {
+                    file.write(ui->plainTextEdit->toPlainText().toLocal8Bit(),qstrlen(ui->plainTextEdit->toPlainText().toLocal8Bit()));
+                    fileEdits[currentFile] = ui->plainTextEdit->toPlainText();
+                    files[currentFile] = ui->plainTextEdit->toPlainText();
+                    ui->savedLabel->setText("Saved");
+                    ui->savedLabel->setStyleSheet("QLabel { color : green; }");
+                }
             }
 
-            ui->savedLabel->setText("Saved");
-            ui->savedLabel->setStyleSheet("QLabel { color : green; }");
+
 
             file.close();
         } else {

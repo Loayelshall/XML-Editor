@@ -48,7 +48,7 @@ void syntaxHighlighter::setRegexes(){
     m_xmlAttributeRegex.setPattern("\\w+(?=\\=)");
     m_xmlValueRegex.setPattern("\"[^\\n\"]+\"(?=[?\\s/>])");
     m_xmlCommentRegex.setPattern("<!--[^\\n]*-->");
-    m_xmlErrorRegex.setPattern("!Error <--[^\\n]*-->");
+    m_xmlErrorRegex.setPattern("!Error <--[^\\n]*--!");
     m_xmlKeywordRegexes = QList<QRegExp>() << QRegExp("<\\?") << QRegExp("/>")
                                               << QRegExp(">") << QRegExp("<") << QRegExp("</")
                                               << QRegExp("\\?>");
