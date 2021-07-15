@@ -1,14 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Snippet>
+    <!-- this is a comment for testing -->
     <Header>
         <id>1</id>
-            <Title>
-                <Author>
-                    <Description>An SXML parameters block</Description>
-                </Author>
-            </Title>
-            <Code name="test" style="test2">
-        This is a test code
-            </Code>
-            <ImageIndex>43</ImageIndex>
-        </Header>
-    </Snippet>
+        <Title>
+            <Author>
+                <Description>An SXML parameters block</Description>
+                <User>block</User>
+                <Description>second test string</Description>
+            </Author>
+        </Title>
+        <!-- this is a comment for testing -->
+        <Closed/>
+
+        <Code name="test" style="test2"   />
+        <ImageIndex>This is a test code</ImageIndex>
+        <Testing test="name">
+            Test
+        </Testing>
+    </Header>
+</Snippet>

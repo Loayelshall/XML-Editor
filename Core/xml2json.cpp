@@ -1,6 +1,6 @@
 #include "xml2json.h"
 
-int xml2json(tree_node *root, int level, std::string *input, std::vector<std::string> children_data_arr)
+int xml2json(tree_node *root, int level, std::string *input, std::vector<tree_node *> children_data_arr)
 {
     //comment
     if (root->get_name() == COMMENT_TAG || children_data_arr.empty())
@@ -10,7 +10,7 @@ int xml2json(tree_node *root, int level, std::string *input, std::vector<std::st
 
     // children
     std::vector<tree_node *> children = root->get_children();
-    std::map<std::string, std::vector<std::string>> children_data_map;
+    std::map<std::string, std::vector<tree_node *>> children_data_map;
 
     //opening tag
     if (children.size())
@@ -19,7 +19,7 @@ int xml2json(tree_node *root, int level, std::string *input, std::vector<std::st
         {
             if (child->get_name() != COMMENT_TAG)
             {
-                children_data_map[child->get_name()].push_back(child->get_data());
+                children_data_map[child->get_name()].push_back(child);
             }
         }
     }
@@ -80,11 +80,11 @@ int xml2json(tree_node *root, int level, std::string *input, std::vector<std::st
                 *input += "\"" + root->get_name() + "\": [";
                 for (auto child_data : children_data_arr)
                 {
-                    *input += "\"" + child_data + "\"";
-                    if (child_data != children_data_arr.back())
-                    {
-                        *input += ", ";
-                    }
+                    // *input += "\"" + child_data + "\"";
+                    // if (child_data != children_data_arr.back())
+                    // {
+                    //     *input += ", ";
+                    // }
                 }
                 *input += "]";
             }

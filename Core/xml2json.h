@@ -7,5 +7,5 @@
 #include <map>
 #include "types.h"
 
-int xml2json(tree_node *root, int level, std::string *input, std::vector<std::string> children_data_arr = std::vector<std::string>(1, "main"));
+int xml2json(tree_node *root, int level, std::string *input, std::vector<tree_node *> children_data_arr = std::vector<tree_node *>());
 #endif
