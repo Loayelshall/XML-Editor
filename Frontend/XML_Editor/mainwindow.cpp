@@ -61,7 +61,7 @@ void MainWindow::save(){
         if(file.open(QIODevice::ReadWrite)){
             if(!flags[currentFile]){
                 if(ui->textBrowser->toPlainText().contains("!Error")){
-                    QMessageBox::information(0, "Error", "Please fix or delete errors before saving");
+                    QMessageBox::critical(0, "Error", "Please fix or delete errors before saving");
                     ui->savedLabel->setText("*Not Saved");
                     ui->savedLabel->setStyleSheet("QLabel { color : red; }");
                 } else {
@@ -73,7 +73,7 @@ void MainWindow::save(){
                 }
             } else {
                 if(ui->plainTextEdit->toPlainText().contains("!Error")){
-                    QMessageBox::information(0, "Error", "Please fix or delete errors before saving");
+                    QMessageBox::critical(0, "Error", "Please fix or delete errors before saving");
                     ui->savedLabel->setText("*Not Saved");
                     ui->savedLabel->setStyleSheet("QLabel { color : red; }");
                 } else {
@@ -89,7 +89,7 @@ void MainWindow::save(){
 
             file.close();
         } else {
-            QMessageBox::information(0, "Error", file.errorString());
+            QMessageBox::critical(0, "Error", file.errorString());
         }
     }
 }
@@ -99,11 +99,11 @@ void MainWindow::on_pushButton_clicked()
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),"/",tr("XML files (*.xml *.xml-compressed)"));
     QFile file(fileName);
     if(std::find(fileNames.begin(), fileNames.end(),fileName) != fileNames.end()){
-        QMessageBox::information(0, "Error", "File Already Opened");
+        QMessageBox::warning(0, "Error", "File Already Opened");
     } else {
 
         if(!file.open(QIODevice::ReadOnly)) {
-            QMessageBox::information(0, "Error", file.errorString());
+            QMessageBox::critical(0, "Error", file.errorString());
         }
         else {
         #pragma omp parallel num_threads(4)
@@ -142,7 +142,7 @@ void MainWindow::on_pushButton_clicked()
 
             } else {
                 flags.push_back(1);
-                QMessageBox::information(0, "Warning", "Styling disabled for better performance");
+                QMessageBox::warning(0, "Warning", "Styling disabled for better performance");
                 ui->textBrowser->hide();
                 ui->plainTextEdit->show();
                 ui->plainTextEdit->setPlainText(txt);
@@ -416,13 +416,13 @@ void MainWindow::on_compressBtn_clicked()
             for(int i = 0; i < compressed.size(); i++){
                 stream << compressed[i] << " ";
             }
-            QMessageBox::information(0, "Success", "File Saved Successfully at" + fileNames[currentFile]);
+            QMessageBox::information(0, "Success", "File Saved Successfully at " + fileNames[currentFile] + "-compressed");
             ui->savedLabel->setText("Saved");
             ui->savedLabel->setStyleSheet("QLabel { color : green; }");
 
             file.close();
         } else {
-            QMessageBox::information(0, "Error", file.errorString());
+            QMessageBox::critical(0, "Error", file.errorString());
         }
     } else {
 
@@ -513,7 +513,7 @@ void MainWindow::on_jsonBtn_clicked()
 
     } else {
         flags.push_back(1);
-        QMessageBox::information(0, "Warning", "Styling disabled for better performance");
+        QMessageBox::warning(0, "Warning", "Styling disabled for better performance");
         ui->textBrowser->hide();
         ui->plainTextEdit->show();
         ui->plainTextEdit->setPlainText(QString::fromLocal8Bit(jsonTxt.c_str()));
