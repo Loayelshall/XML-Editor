@@ -3,6 +3,7 @@
 #include <string>
 
 #define COMMENT_TAG "xml,comment"
+#define XML_TAG_s "XML,TAG"
 
 enum error_types{
     MISSING_TAG,

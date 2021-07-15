@@ -1,0 +1,11 @@
+debug/main.o
+debug/mainwindow.o
+debug/syntaxhighlighter.o
+debug/balance_tags.o
+debug/compress.o
+debug/minify.o
+debug/parse_tree.o
+debug/prettifying.o
+debug/xml2json.o
+debug/moc_mainwindow.o
+debug/moc_syntaxhighlighter.o

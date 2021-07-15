@@ -38,7 +38,7 @@ MainWindow::~MainWindow()
 QString markErrors(QVector<balance_error> errors, QString in){
     std::sort(errors.begin(), errors.end(), [](balance_error a, balance_error b) { return a.index < b.index; });
     for(int i=0; i<errors.size(); i++){
-        int insertionIndex = errors[i].index + (i*14);
+        int insertionIndex = errors[i].index + (i*15);
         in.insert(insertionIndex, "!Error <--   ");
         int j = insertionIndex;
         while(1){
@@ -484,18 +484,21 @@ void MainWindow::on_jsonBtn_clicked()
 {
 #pragma omp parallel
     std::string jsonTxt = "";
+     tree_node * root;
+     if(trees[currentFile] != nullptr){
+         root = trees[currentFile];
+          xml2json(root,-1, &jsonTxt);
+     } else {
+         return;
+     }
     if(!flags[currentFile]){
-        QString txt = ui->textBrowser->toPlainText();
-        tree_node * root = new tree_node("XML","");
-        parse_tree(root,txt.toLocal8Bit().constData());
-        xml2json(root,-1, &jsonTxt);
+
+
+
 
         ui->textBrowser->setPlainText(QString::fromLocal8Bit(jsonTxt.c_str()));
     } else {
-        QString txt = ui->plainTextEdit->toPlainText();
-        tree_node * root = new tree_node("XML","");
-        parse_tree(root,txt.toLocal8Bit().constData());
-        xml2json(root,-1, &jsonTxt);
+
 
 
         ui->plainTextEdit->setPlainText(QString::fromLocal8Bit(jsonTxt.c_str()));

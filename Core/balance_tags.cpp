@@ -70,7 +70,7 @@ QVector<balance_error> balance_tags(std::string xml_string)
                     attribute_buffer.push_back(xml_string[i]);
                 }
             }
-            std::cout << tag_buffer.name << '\n';
+
             if (tag_buffer.name[0] == '/')
             {
                 if (tag_buffer.name.compare(1, tag_stack.top().name.size(), tag_stack.top().name) == 0)
