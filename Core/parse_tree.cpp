@@ -80,7 +80,7 @@ void parse_tree(tree_node *root, std::string xml_string)
 			}
 			else
 			{
-				tree_node *temp = new tree_node("XML", data);
+                tree_node *temp = new tree_node("XML,TAG", data);
 				node_stack.top()->add_child(temp);
 			}
 
@@ -109,7 +109,7 @@ void parse_tree(tree_node *root, std::string xml_string)
 			if (xml_string[i] == ' ')
 			{
 				i++;
-				for (; xml_string[i] != '>' && xml_string[i] != '/'; i++)
+                for (; xml_string[i] != '>'; i++)
 				{
 					attr.push_back(xml_string[i]);
 				}

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>XML Editor</string>
   </property>
   <property name="styleSheet">
    <string notr="true">MainWindow{
@@ -129,7 +129,7 @@ min-width:310px;
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout">
              <item>
-              <widget class="QPushButton" name="pushButton_5">
+              <widget class="QPushButton" name="compressBtn">
                <property name="font">
                 <font>
                  <family>Segoe UI Semibold</family>
@@ -144,7 +144,22 @@ min-width:310px;
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_2">
+              <widget class="QPushButton" name="deCompBtn">
+               <property name="font">
+                <font>
+                 <family>Segoe UI Semibold</family>
+                 <pointsize>9</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Decompress</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="prettyBtn">
                <property name="font">
                 <font>
                  <family>Segoe UI Semibold</family>
@@ -163,7 +178,7 @@ min-width:310px;
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
-              <widget class="QPushButton" name="pushButton_3">
+              <widget class="QPushButton" name="jsonBtn">
                <property name="font">
                 <font>
                  <family>Segoe UI Semibold</family>
@@ -178,7 +193,7 @@ min-width:310px;
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_4">
+              <widget class="QPushButton" name="miniBtn">
                <property name="font">
                 <font>
                  <family>Segoe UI Semibold</family>
@@ -210,7 +225,7 @@ min-width:310px;
          </font>
         </property>
         <property name="readOnly">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -220,6 +235,12 @@ min-width:310px;
          <font>
           <family>Consolas</family>
          </font>
+        </property>
+        <property name="undoRedoEnabled">
+         <bool>true</bool>
+        </property>
+        <property name="readOnly">
+         <bool>false</bool>
         </property>
        </widget>
       </item>

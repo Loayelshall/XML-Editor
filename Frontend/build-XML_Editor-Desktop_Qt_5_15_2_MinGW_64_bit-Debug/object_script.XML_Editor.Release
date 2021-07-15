@@ -1,0 +1,11 @@
+release/main.o
+release/mainwindow.o
+release/syntaxhighlighter.o
+release/balance_tags.o
+release/compress.o
+release/minify.o
+release/parse_tree.o
+release/prettifying.o
+release/xml2json.o
+release/moc_mainwindow.o
+release/moc_syntaxhighlighter.o

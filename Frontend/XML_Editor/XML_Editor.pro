@@ -12,21 +12,32 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     syntaxhighlighter.cpp \
-    ../../Core/balance_tags.cpp
+    ../../Core/balance_tags.cpp \
+    ../../Core/compress.cpp \
+    ../../Core/minify.cpp \
+    ../../Core/parse_tree.cpp \
+    ../../Core/prettifying.cpp \
+    ../../Core/xml2json.cpp
 
 HEADERS += \
     mainwindow.h \
     syntaxhighlighter.h \
     ../../Core/types.h \
-    ../../Core/balance_tags.h
+    ../../Core/balance_tags.h \
+    ../../Core/compress.h \
+    ../../Core/minify.h \
+    ../../Core/parse_tree.h \
+    ../../Core/prettifying.h \
+    ../../Core/xml2json.h
 
 
 
 FORMS += \
     mainwindow.ui
 
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-QMAKE_CXXFLAGS+= -openmp
+
