@@ -2,18 +2,28 @@
 <Snippet>
     <!-- this is a comment for testing -->
     <Header>
-        <id>1</id>
+        <id>"1</id>
         <Title>
             <Author>
-                <Description>An SXML parameters block</Description>
-                <User>block</User>
-                <Description>second test string</Description>
+                <Description>An "SXML pa"rameter"s block"</Description>
+                <User>Test</User>
+                <Description>Test2</Description>
+                <User>Test3</User>
+            </Author>
+            <Writer>
+                <Description>An "SXML pa"rameter"s block"</Description>
+                <User>Test</User>
+                <Description>Test2</Description>
+                <User>Test3</User>
+            </Writer>
+            <Author>
+                <User>test</User>
             </Author>
         </Title>
         <!-- this is a comment for testing -->
         <Closed/>
 
-        <Code name="test" style="test2"   />
+        <Code name="test" style="test2" />
         <ImageIndex>This is a test code</ImageIndex>
         <Testing test="name">
             Test
