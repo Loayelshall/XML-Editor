@@ -12,18 +12,63 @@ std::vector<balance_error> balance_tags(std::string xml_string)
 {
     std::stack<tag> tag_stack;
     std::vector<balance_error> balance_error_arr;
-    std::string string_buffer;
+    std::string string_buffer, attribute_buffer;
     for (size_t i = 0; i < xml_string.size(); i++)
     {
         tag tag_buffer;
-        if (xml_string[i] == '<')
+        if (xml_string[i] == '<' && xml_string[i + 1] == '?')
+        {
+            int temp = i;
+            i += 2;
+            int xml_close_index = xml_string.find("?>", i, xml_string.length());
+            if (xml_close_index == -1)
+            {
+                report_error(XML_CLOSE, temp, balance_error_arr);
+                break;
+            }
+            else
+            {
+                i += xml_close_index + 2;
+            }
+        }
+        else if (xml_string[i] == '<' && xml_string[i + 1] == '!')
+        {
+            //comment
+            if (xml_string[i + 2] == '-' && xml_string[i + 3] == '-')
+            {
+                int temp = i;
+                i += 4;
+                int comment_close_index = xml_string.find("-->", i, xml_string.length());
+                if (comment_close_index == -1)
+                {
+                    report_error(COMMENT_CLOSE, temp, balance_error_arr);
+                    break;
+                }
+                else
+                {
+                    i += comment_close_index + 2;
+                }
+            }
+            else
+            {
+                report_error(WRONG_TAG, i, balance_error_arr);
+            }
+        }
+        else if (xml_string[i] == '<')
         {
             int start_index = i;
             i++;
-            for (size_t j = 0; xml_string[i] != '>' && xml_string[i] != ' '; j++, i++)
+            for (; xml_string[i] != '>' && xml_string[i] != ' '; i++)
             {
                 tag_buffer.name.push_back(xml_string[i]);
                 tag_buffer.start_index = start_index;
+            }
+            if (xml_string[i] == ' ')
+            {
+                for (; xml_string[i] != '>'; i++)
+                {
+                    attribute_buffer.push_back(xml_string[i]);
+                }
             }
             std::cout << tag_buffer.name << '\n';
             if (tag_buffer.name[0] == '/')
@@ -53,7 +98,10 @@ std::vector<balance_error> balance_tags(std::string xml_string)
                     tag_stack.pop();
                     string_buffer.clear();
                 }
-                tag_stack.push(tag_buffer);
+                if (xml_string[i - 1] != '/')
+                {
+                    tag_stack.push(tag_buffer);
+                }
             }
         }
         else if (xml_string[i] != '\n' && xml_string[i] != ' ')
@@ -68,6 +116,3 @@ std::vector<balance_error> balance_tags(std::string xml_string)
     }
     return balance_error_arr;
 }
-
-// stack ----> string
-// stack ----> string + index open bracket tag with error
