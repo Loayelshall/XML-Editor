@@ -16,3 +16,7 @@ Frontend/build-XML_Editor-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/debug/moc_syntaxh
 Frontend/build-XML_Editor-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/debug/syntaxhighlighter.o
 Frontend/build-XML_Editor-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/usersloayel~1appdatalocaltemptmpndp751
 Frontend/build-XML_Editor-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/usersloayel~1appdatalocaltemptmpqvm2lf
+Core/a.out
+.vscode/launch.json
+.vscode/settings.json
+.vscode/tasks.json
