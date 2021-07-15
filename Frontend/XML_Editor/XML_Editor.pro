@@ -12,13 +12,23 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     syntaxhighlighter.cpp \
-    ../../Core/balance_tags.cpp
+    ../../Core/balance_tags.cpp \
+    ../../Core/compress.cpp \
+    ../../Core/minify.cpp \
+    ../../Core/parse_tree.cpp \
+    ../../Core/prettifying.cpp \
+    ../../Core/xml2json.cpp
 
 HEADERS += \
     mainwindow.h \
     syntaxhighlighter.h \
     ../../Core/types.h \
-    ../../Core/balance_tags.h
+    ../../Core/balance_tags.h \
+    ../../Core/compress.h \
+    ../../Core/minify.h \
+    ../../Core/parse_tree.h \
+    ../../Core/prettifying.h \
+    ../../Core/xml2json.h
 
 
 

@@ -12,7 +12,7 @@ QVector<balance_error> balance_tags(std::string xml_string)
 {
     std::stack<tag> tag_stack;
     QVector<balance_error> balance_error_arr;
-    std::string string_buffer;
+    std::string string_buffer, attribute_buffer;
     for (size_t i = 0; i < xml_string.size(); i++)
     {
         tag tag_buffer;
@@ -104,7 +104,7 @@ QVector<balance_error> balance_tags(std::string xml_string)
                 }
             }
         }
-        else if (xml_string[i] != '\n' && xml_string[i] != ' ' && xml_string[i] != '\r')
+        else if (xml_string[i] != '\n' && xml_string[i] != ' ')
         {
             string_buffer.push_back(xml_string[i]);
         }
