@@ -13,6 +13,11 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">MainWindow{
+background-color: #EEEEEE;
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="2" column="0">
@@ -21,6 +26,14 @@
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <widget class="QPushButton" name="pushButton">
+          <property name="font">
+           <font>
+            <family>Segoe UI Semibold</family>
+            <pointsize>9</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="text">
            <string>Open File</string>
           </property>
@@ -28,6 +41,13 @@
         </item>
         <item>
          <widget class="QLabel" name="label">
+          <property name="font">
+           <font>
+            <family>Segoe UI Semibold</family>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="text">
            <string>Open Files</string>
           </property>
@@ -61,6 +81,9 @@
 min-width:310px;
 }</string>
           </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
           <column>
            <property name="text">
             <string>File Name</string>
@@ -77,9 +100,8 @@ min-width:310px;
          <widget class="QLabel" name="savedLabel">
           <property name="font">
            <font>
+            <family>Segoe UI Semibold</family>
             <pointsize>10</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
            </font>
           </property>
           <property name="text">
@@ -89,6 +111,12 @@ min-width:310px;
         </item>
         <item>
          <widget class="QGroupBox" name="groupBox">
+          <property name="font">
+           <font>
+            <family>Consolas</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="styleSheet">
            <string notr="true">QGroupBox{
 	min-height:135px;
@@ -102,6 +130,14 @@ min-width:310px;
             <layout class="QHBoxLayout" name="horizontalLayout">
              <item>
               <widget class="QPushButton" name="pushButton_5">
+               <property name="font">
+                <font>
+                 <family>Segoe UI Semibold</family>
+                 <pointsize>9</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
                <property name="text">
                 <string>Compress</string>
                </property>
@@ -109,6 +145,14 @@ min-width:310px;
              </item>
              <item>
               <widget class="QPushButton" name="pushButton_2">
+               <property name="font">
+                <font>
+                 <family>Segoe UI Semibold</family>
+                 <pointsize>9</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
                <property name="text">
                 <string>Prettifying</string>
                </property>
@@ -120,6 +164,14 @@ min-width:310px;
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
               <widget class="QPushButton" name="pushButton_3">
+               <property name="font">
+                <font>
+                 <family>Segoe UI Semibold</family>
+                 <pointsize>9</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
                <property name="text">
                 <string>Convert to JSON</string>
                </property>
@@ -127,6 +179,14 @@ min-width:310px;
              </item>
              <item>
               <widget class="QPushButton" name="pushButton_4">
+               <property name="font">
+                <font>
+                 <family>Segoe UI Semibold</family>
+                 <pointsize>9</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
                <property name="text">
                 <string>Minifying</string>
                </property>
@@ -144,13 +204,24 @@ min-width:310px;
         <property name="enabled">
          <bool>true</bool>
         </property>
+        <property name="font">
+         <font>
+          <family>Consolas</family>
+         </font>
+        </property>
         <property name="readOnly">
          <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QTextBrowser" name="textBrowser"/>
+       <widget class="QTextBrowser" name="textBrowser">
+        <property name="font">
+         <font>
+          <family>Consolas</family>
+         </font>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
